@@ -90,7 +90,19 @@ def calculate_probability(data, threshold_height=180):
     """
     return np.sum(data > threshold_height) / len(data)
 
-height_data = generate_height_data()
-descriptive_statistics(height_data)
-identify_outliers(height_data)
-visualise_histogram(height_data)
+def main():
+    """
+    Main function. to change it late
+    """
+    height_data = generate_height_data()
+    descriptive_statistics(height_data)
+    visualise_histogram(height_data)
+    calculate_percentiles(height_data)
+    identify_outliers(height_data)
+    random_sample = random_sampling(height_data)
+    print(f"random sample: {random_sample}")
+    print(f"p-value: {hypothesis_testing(height_data)}")
+    print(f"probability: {calculate_probability(height_data)}")
+
+if __name__ == "__main__":
+    main()
