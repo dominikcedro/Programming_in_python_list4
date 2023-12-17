@@ -100,7 +100,7 @@ def main():
     calculate_percentiles(height_data)
     identify_outliers(height_data)
     random_sample = random_sampling(height_data)
-    print(f"random sample: {random_sample}")
+    # print(f"random sample: {random_sample}")
     print(f"p-value: {hypothesis_testing(height_data)}")
     print(f"probability: {calculate_probability(height_data)}")
 
