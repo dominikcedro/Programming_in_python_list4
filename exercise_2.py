@@ -37,7 +37,10 @@ def task1(hd):
             fontsize=10)
     ax.text(categories[1], sick[1] / 2, f'{percent_sick_f:.2f}%', ha='center', va='center', color='white',
             fontsize=10)
+    plt.savefig('ex2_1.pdf')
+
     plt.show()
+
 
 
 def task2(hd):
@@ -67,6 +70,8 @@ def task2(hd):
     ax.set_xlabel('Groups')
     ax.set_ylabel('Mean value of serum cholesterol in mg/dl')
     ax.set_title('Comparison of mean value of serum cholesterol in mg/dl')
+    plt.savefig('ex2_2.pdf')
+
     plt.show()
 
 
@@ -81,7 +86,10 @@ def task3(hd):
     plt.hist(disease['Age'], color='green')
     plt.xlabel('Age')
     plt.ylabel('Number of people')
+    plt.savefig('ex2_3.pdf')
+
     plt.show()
+
 
 
 def task4(hd):
@@ -95,7 +103,10 @@ def task4(hd):
     plt.title('Box plot for the maximum achieved heart rate')
     plt.xlabel('Groups')
     plt.ylabel('Maximum achieved heart rate')
+    plt.savefig('ex2_4.pdf')
+
     plt.show()
+
 
 
 def task5(hd):
@@ -106,17 +117,20 @@ def task5(hd):
     freq_matrix = pd.crosstab(index=hd['Disease'], columns=hd['Exercise induced angina'])
     freq_matrix.plot(kind='bar', color=['gray', 'orange'])
     plt.title('Frequency of Heart Disease Occurrence based on Exercise-Induced Angina')
+    plt.subplots_adjust(bottom=0.2)
     plt.xlabel('Disease present')
     plt.ylabel('Frequency')
+    # plt.savefig('ex2_5extra.pdf')
     plt.show()
+
 
 
 def main():
     hd = pd.read_csv("heart_disease_dataset.csv")
-    task1(hd)
-    task2(hd)
-    task3(hd)
-    task4(hd)
+    # task1(hd)
+    # task2(hd)
+    # task3(hd)
+    # task4(hd)
     task5(hd)
 
 
