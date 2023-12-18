@@ -65,34 +65,51 @@ def task4(hd):
     # 4. Draw a box plot for the maximum achieved heart rate during the exercise test
     # depending on the presence of heart disease. What observations can be made based
     # on this plot?
-    group_by_max = hd['Maximum heart rate achieved'].groupby(hd['Disease']).mean()
-    # print(group_by_max)
-    plt.boxplot(group_by_max)
-    plt.title('Box plot of maximum achieved heart rate')
-    plt.xlabel('Disease')
+    disease_heartrate = hd.loc[hd['Disease'] == True, 'Maximum heart rate achieved'].values
+    healthy_heartrate = hd.loc[hd['Disease'] == False, 'Maximum heart rate achieved'].values
+
+    plt.boxplot([disease_heartrate, healthy_heartrate], labels=['Disease', 'Healthy'])
+    plt.title('Box plot for the maximum achieved heart rate')
+    plt.xlabel('Groups')
     plt.ylabel('Maximum achieved heart rate')
+    plt.legend()
     plt.show()
 
-# 5. Draw a bar chart for the frequency of heart disease occurrence depending on whether
-# the patient has angina during the exercise test. What observations can be made
-# based on the chart?
+def task5(hd):
+    # 5. Draw a bar chart for the frequency of heart disease occurrence depending on whether
+    # the patient has angina during the exercise test. What observations can be made
+    # based on the chart?
+    #
+    # angina = hd.loc[hd['Exercise induced angina'] == True, 'Disease'].count()
+    # no_angina = hd.loc[hd['Exercise induced angina'] == False, 'Disease'].count()
+    # print(angina, no_angina)
+    #
+    # plt.bar(['Angina', 'No angina'], [angina, no_angina])
+    # plt.title('Frequency of heart disease occurrence')
+    # plt.xlabel('Groups')
+    # plt.ylabel('Frequency')
+    # plt.show()
+    frequency_table = pd.crosstab(index=hd['Disease'], columns=hd['Exercise induced angina'])
 
-# group_by_angina = hd.groupby(['Exercise induced angina', 'Disease']).size()
-# print(group_by_angina)
-#
-# plt.bar(group_by_angina.index, group_by_angina.values)
-# plt.title('Bar chart of frequency of heart disease occurrence')
-# plt.xlabel('Angina')
-# plt.ylabel('Number of people')
-# plt.show()
+    # Plot the bar chart
+    frequency_table.plot(kind='bar', stacked=True, color=['blue', 'orange'])
+
+    # Add labels and title
+    plt.title('Frequency of Heart Disease Occurrence based on Exercise-Induced Angina')
+    plt.xlabel('Disease')
+    plt.ylabel('Frequency')
+
+    # Show the plot
+    plt.show()
+
 
 def main():
     hd = pd.read_csv("heart_disease_dataset.csv")
     # task1(hd)
     # task2(hd)
     # task3(hd)
-    task4(hd)
-    # task5(hd)
+    # task4(hd)
+    task5(hd)
 
 if __name__ == "__main__":
     main()
